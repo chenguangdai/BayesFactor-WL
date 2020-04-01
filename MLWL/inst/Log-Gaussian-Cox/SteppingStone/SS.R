@@ -8,12 +8,6 @@ ngrid <- 10
 
 ### configuration
 source("configuration.R")
-### load the mode
-load(paste("/Users/chenguang/Desktop/working papers/MTM/revision/code/log-cox-process/Stepping Stone/mode/mode", ngrid, ".RData", sep = ""))
-x0 <- data_save$surrogate_mu
-### load the temeprature sequence
-load(paste("/Users/chenguang/Desktop/working papers/MTM/revision/code/log-cox-process/Stepping Stone/sequence/", ngrid, ".RData", sep = ""))
-temperature <- data_save$sequence
 nparticles <- 1.5*10^3
 
 ### Stepping stone
@@ -46,12 +40,8 @@ for(iter in 1:(length(temperature) - 1)){
   logw <- (gamma_target - gamma_proposal) * loglikelihood(xparticles)
   maxlw <- max(logw)
   lognormconst_ratio[iter] <- log(mean(exp(logw - maxlw))) + maxlw
-  
-  print(iter/length(temperature))
 }
-
 end_time <- Sys.time()
-
 
 lognormconst <- sum(lognormconst_ratio)
 running_time <- end_time - start_time
