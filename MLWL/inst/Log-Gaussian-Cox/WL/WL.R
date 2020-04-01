@@ -1,4 +1,4 @@
-##### Normalizing constant estimation for the Log-Gaussian-Cox process using the WL mixture method
+### marginal likelihood estimation for the Log-Gaussian-Cox process using the WL mixture method
 rm(list = ls())
 library(MLWL)
 library(debiasedhmc)
