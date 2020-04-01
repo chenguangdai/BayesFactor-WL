@@ -20,7 +20,7 @@ target_gradlogdensity <- function(x) return(gradpriorlogdensity(x) + gradloglike
 source("code/HMC.R")
 
 ### define the surrogate distribution
-load(paste("/mode/", ngrid, ".RData", sep = ""))
+load(paste("mode/", ngrid, ".RData", sep = ""))
 surrogate_mu <- data_save$surrogate_mu
 if(ngrid == 10){
   surrogate_sigma <- rep(1.0, dimension)
