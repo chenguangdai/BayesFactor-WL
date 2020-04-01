@@ -13,11 +13,13 @@ source("code/prior.R")
 source("code/likelihood.R")
 
 ### target distribution
-target_logdensity <- function(x) return(prior$logdensity(x) + loglikelihood(x))
-target_gradlogdensity <- function(x) return(prior$gradlogdensity(x) + gradloglikelihood(x))
+target <- list()
+target$logdensity <- function(x) return(prior$logdensity(x) + loglikelihood(x))
+target$gradlogdensity <- function(x) return(prior$gradlogdensity(x) + gradloglikelihood(x))
 
 ### an HMC kernel invariant to the target distribution
 source("code/HMC.R")
+target_kernel <- construct_kernel(target)
 
 ### define the surrogate distribution
 load(paste("mode/", ngrid, ".RData", sep = ""))
