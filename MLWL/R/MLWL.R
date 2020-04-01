@@ -12,7 +12,7 @@
 #' @return The log normalizing constant (marginal likelihood) of the target distribution.
 #' @export
 MLWL <- function(num_iterations, num_burnin, target_kernel, surrogate_kernel, target_logdensity, 
-                 surrogate_logdensity, learning_rate, flatness_criterion, x0){
+                 surrogate_logdensity, learning_rate, flatness_criterion, x0, suppress = False){
   ### Initialization of the Wang-Landau algorithm
   target_logZ <- surrogate_logZ <- rep(0, num_iterations)
   target_hist <- surrogate_hist <- 0
@@ -60,7 +60,7 @@ MLWL <- function(num_iterations, num_burnin, target_kernel, surrogate_kernel, ta
       target_hist <- surrogate_hist <- 0
     }
     
-    if(iter == (progress_index/10*num_iterations)){
+    if(iter == (progress_index/10*num_iterations) && !suppress){
       print(paste("Finish", progress_index * 10, "%! ", "The current learning rate is", round(learning_rate, 3)))
       progress_index <- progress_index + 1
     }
