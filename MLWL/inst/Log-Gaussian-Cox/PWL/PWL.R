@@ -9,10 +9,8 @@ ngrid <- 10
 
 ### configuration
 source("configuration.R")
-### load the mode
-load(paste("/Users/chenguang/Desktop/working papers/MTM/revision/code/log-cox-process/PWL/mode/mode", ngrid, ".RData", sep = ""))
-x0 <- data_save$surrogate_mu
 
+### algorithmic settings of PWL
 num_iterations <- 1.5*10^3
 num_burnin <- num_iterations/2
 learning_rate <- 1
@@ -47,9 +45,9 @@ for(iter in 1:(length(temperature) - 1)){
   }
   
   ### run the WL mixture method
-  lognormconst_ratio[iter] <- MLWL(num_iterations, num_burnin, target_kernel, surrogate_kernel,
-                                    target$logdensity, surrogate$logdensity, learning_rate, flatness_criterion, x0)$log_marginal_likelihood
-  print(iter/length(temperature))
+  result <- MLWL(num_iterations, num_burnin, target_kernel, surrogate_kernel,
+                                    target$logdensity, surrogate$logdensity, learning_rate, flatness_criterion, x0)
+  lognormconst_ratio[iter] <- result$log_marginal_likelihood
 }
 end_time <- Sys.time()
 
