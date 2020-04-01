@@ -13,8 +13,8 @@ source("code/prior.R")
 source("code/likelihood.R")
 
 ### target distribution
-target_logdensity <- function(x) return(priorlogdensity(x) + loglikelihood(x))
-target_gradlogdensity <- function(x) return(gradpriorlogdensity(x) + gradloglikelihood(x))
+target_logdensity <- function(x) return(prior$logdensity(x) + loglikelihood(x))
+target_gradlogdensity <- function(x) return(prior$gradlogdensity(x) + gradloglikelihood(x))
 
 ### an HMC kernel invariant to the target distribution
 source("code/HMC.R")
