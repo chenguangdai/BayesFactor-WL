@@ -37,7 +37,7 @@ for(iter in 1:(length(temperature) - 1)){
   }
   
   ### calculate the log normalizing constant ratio
-  logw <- (gamma_target - gamma_proposal) * loglikelihood(xparticles)
+  logw <- (gamma_target - gamma_proposal) * loglikelihood_matrix(xparticles)
   maxlw <- max(logw)
   lognormconst_ratio[iter] <- log(mean(exp(logw - maxlw))) + maxlw
 }
