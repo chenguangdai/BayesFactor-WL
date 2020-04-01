@@ -22,3 +22,5 @@ temperature <- data_save$sequence
 load(paste("mode/", ngrid, ".RData", sep = ""))
 x0 <- data_save$surrogate_mu
 
+setwd("./PWL")
+
