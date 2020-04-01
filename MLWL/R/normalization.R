@@ -1,4 +1,4 @@
-#' Normalizing two log constants to sum 1
+#' Normalizing two log constants
 #'
 #' @param target_logZ        Unnormalized log normalizing constants of the target distribution
 #' @param surrogate_logZ     Unnormalized log normalizing constants of the surrogate distribution
