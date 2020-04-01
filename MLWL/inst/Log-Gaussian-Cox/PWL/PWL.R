@@ -46,7 +46,7 @@ for(iter in 1:(length(temperature) - 1)){
   
   ### run the WL mixture method
   result <- MLWL(num_iterations, num_burnin, target_kernel, surrogate_kernel,
-                                    target$logdensity, surrogate$logdensity, learning_rate, flatness_criterion, x0)
+                 target$logdensity, surrogate$logdensity, learning_rate, flatness_criterion, x0, suppress = T)
   lognormconst_ratio[iter] <- result$log_marginal_likelihood
 }
 end_time <- Sys.time()
