@@ -1,20 +1,18 @@
-### Parallel Wang-Landau for the Log-Gaussian Cox process
+### Parallel Wang-Landau algorithm for the Log-Gaussian Cox process
 rm(list = ls())
 library(MLWL)
 library(debiasedhmc)
 library(spatstat)
 
-### square size
-ngrid <- 30
+### number of grids
+ngrid <- 10
+
 ### configuration
-source("/Users/chenguang/Desktop/working papers/MTM/revision/code/log-cox-process/PWL/configuration.R")
+source("configuration.R")
 ### load the mode
 load(paste("/Users/chenguang/Desktop/working papers/MTM/revision/code/log-cox-process/PWL/mode/mode", ngrid, ".RData", sep = ""))
 x0 <- data_save$surrogate_mu
 
-### load the temeprature sequence
-load(paste("/Users/chenguang/Desktop/working papers/MTM/revision/code/log-cox-process/PWL/sequence/", ngrid, ".RData", sep = ""))
-temperature <- data_save$sequence
 num_iterations <- 1.5*10^3
 num_burnin <- num_iterations/2
 learning_rate <- 1
