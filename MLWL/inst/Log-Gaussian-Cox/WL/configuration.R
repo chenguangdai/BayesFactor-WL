@@ -80,7 +80,7 @@ target_kernel <- function(x){
 }
 
 ### define the surrogate distribution
-load(paste("~/mode/mode", ngrid, ".RData", sep = ""))
+load(paste(getwd(), "/mode/mode", ngrid, ".RData", sep = ""))
 surrogate_mu <- data_save$surrogate_mu
 if(ngrid == 10){
   surrogate_sigma <- rep(1.0, dimension)
