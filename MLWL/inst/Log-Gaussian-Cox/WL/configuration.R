@@ -23,7 +23,7 @@ gradloglikelihood <- function(x) return(matrix(data_counts, nrow = 1) - paramete
 target_logdensity <- function(x) return(priorlogdensity(x) + loglikelihood(x))
 target_gradlogdensity <- function(x) return(gradpriorlogdensity(x) + gradloglikelihood(x))
 
-##### A HMC kernel invariant to the target distribution
+##### An HMC kernel invariant to the target distribution
 stepsize <- 0.25
 nsteps <- 10
 ### leapfrog
