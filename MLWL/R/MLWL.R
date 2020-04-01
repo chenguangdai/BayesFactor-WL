@@ -9,6 +9,7 @@
 #' @param learning_rate         Initialization of the learning_rate
 #' @param flatness_criterion    The flatness criterion to adaptly decrease the learning rate. 
 #' @param x0                    An initializing sample
+#' @param suppress              Suppress the message
 #' @return The log normalizing constant (marginal likelihood) of the target distribution.
 #' @export
 MLWL <- function(num_iterations, num_burnin, target_kernel, surrogate_kernel, target_logdensity, 
