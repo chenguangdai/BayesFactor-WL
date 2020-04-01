@@ -19,7 +19,7 @@ target$gradlogdensity <- function(x) return(prior$gradlogdensity(x) + gradloglik
 
 ### an HMC kernel invariant to the target distribution
 source("code/HMC.R")
-target_kernel <- construct_kernel(target)
+target$kernel <- construct_kernel(target)
 
 ### define the surrogate distribution
 load(paste("mode/", ngrid, ".RData", sep = ""))
@@ -31,12 +31,13 @@ if(ngrid == 10){
 }else{
   surrogate_sigma <- rep(1.3, dimension)
 }
-surrogate_logdensity <- function(x){
+surrogate <- list()
+surrogate$logdensity <- function(x){
   return(-dimension/2*log(2*pi) - sum(log(surrogate_sigma)) - 0.5 * sum((x - surrogate_mu)^2/surrogate_sigma^2))
 } 
 
 ### direct sampling from the surrogate distribution
-surrogate_kernel <- function(x){
+surrogate$kernel <- function(x){
   return(rnorm(dimension, mean = surrogate_mu, sd = surrogate_sigma))
 }
 
