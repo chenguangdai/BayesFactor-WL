@@ -41,6 +41,6 @@ surrogate$kernel <- function(x){
   return(rnorm(dimension, mean = surrogate_mu, sd = surrogate_sigma))
 }
 
-
+setwd("./WL")
 
 
