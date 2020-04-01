@@ -3,10 +3,11 @@ rm(list = ls())
 library(debiasedhmc)
 library(spatstat)
 
-### square size
-ngrid <- 20
+### number of grids
+ngrid <- 10
+
 ### configuration
-source("/Users/chenguang/Desktop/working papers/MTM/revision/code/log-cox-process/Stepping Stone/configuration.R")
+source("configuration.R")
 ### load the mode
 load(paste("/Users/chenguang/Desktop/working papers/MTM/revision/code/log-cox-process/Stepping Stone/mode/mode", ngrid, ".RData", sep = ""))
 x0 <- data_save$surrogate_mu
