@@ -2,9 +2,6 @@
 rm(list = ls())
 library(debiasedhmc)
 
-### source C functions
-sourceCpp("mvnorm.cpp")
-
 ### SNR and lambda
 SNR <- 3
 lambda <- 5
