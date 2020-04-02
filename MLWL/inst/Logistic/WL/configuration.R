@@ -10,7 +10,7 @@ target$gradlogdensity <- function(x) debiasedhmc:::logistic_gradlogtarget_c(x, Y
 
 ### the surrogate distribution
 surrogate <- list()
-load("data/posterior_moments_lambda_", lambda, ".RData")
+load(paste("data/posterior_moments_lambda_", lambda, ".RData", sep = ""))
 surrogate_mean <- data_save$mean
 surrogate_cov <- data_save$cov
 surrogate_precision <- solve(surrogate_cov)
