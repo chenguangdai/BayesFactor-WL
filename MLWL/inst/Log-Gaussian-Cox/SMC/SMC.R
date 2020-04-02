@@ -1,1 +1,6 @@
-
+library(MASS)
+library(Rcpp)
+library(RcppEigen)
+library(spatstat)
+library(smcUtils)
+library(mgcv)
