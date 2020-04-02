@@ -19,11 +19,3 @@ NumericVector dmvnorm_cholesky_inverse(const NumericMatrix & x, const NumericVec
   }
   return wrap(results);
 }
-
-// [[Rcpp::depends(RcppEigen)]]
-// [[Rcpp::export]]
-SEXP eigenMapMatMult(const Eigen::Map<Eigen::MatrixXd> A, Eigen::Map<Eigen::MatrixXd> B){
-    Eigen::MatrixXd C = A * B;
-
-    return Rcpp::wrap(C);
-}
