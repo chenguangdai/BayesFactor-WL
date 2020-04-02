@@ -53,6 +53,6 @@ stan.fit <- stan(model_code = LogisticRegression.stan,
                    Y = Y),
                  warmup = warmup, iter = iteration, chains = 1, control = list(adapt_delta = 0.8))
 stan.fit.extract = extract(stan.fit)
-bridge_result <- bridge_sampler(stan.fit, method = "normal", maxiter = 1000)
+bridge_result <- bridge_sampler(stan.fit, method = "normal", maxiter = 1000, silent = T)
 lognormconst = bridge_result$logml
  
