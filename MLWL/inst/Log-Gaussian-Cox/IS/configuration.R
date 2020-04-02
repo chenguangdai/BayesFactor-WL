@@ -30,13 +30,13 @@ if(ngrid == 10){
   surrogate_sigma <- rep(1.3, dimension)
 }
 surrogate <- list()
-surrogate$logdensity <- function(x){
-  return(-dimension/2*log(2*pi) - sum(log(surrogate_sigma)) - 0.5 * sum((x - surrogate_mu)^2/surrogate_sigma^2))
-} 
+surrogate_precision <- diag(1/surrogate_sigma^2)
+surrogate_precision_chol <- t(chol(surrogate_precision))
+surrogate$logdensity <- function(x) return(dmvnorm_cholesky_inverse(x, surrogate_mu, surrogate_precision_chol))
 surrogate$rinit <- function(n){
   xparticles <- matrix(0, nrow = n, ncol = dimension)
   for(j in 1:dimension){
-    xparticles[, j] <- rnorm(n, mean = surrogate_mu[j], sd = surrogate_sigma)
+    xparticles[, j] <- rnorm(n, mean = surrogate_mu[j], sd = surrogate_sigma[1])
   }
   return(xparticles)
 } 
