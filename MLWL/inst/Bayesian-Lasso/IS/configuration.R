@@ -55,4 +55,7 @@ proposal$rinit <- function(n) return(fast_rmvnorm(n = n, mean = proposal_mean, c
 
 setwd('./IS')
 
+### source C functions
+sourceCpp("mvnorm.cpp")
+
 
