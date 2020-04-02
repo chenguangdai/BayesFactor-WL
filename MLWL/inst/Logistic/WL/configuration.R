@@ -38,11 +38,11 @@ target$kernel <- function(x){
   x_current <- x
   v_current <- matrix(rnorm(dimension), nrow = 1)
   ### leapfrog steps
-  leapfrog_result <- leapfrog(x_current, v_current, target_gradlogdensity)
+  leapfrog_result <- leapfrog(x_current, v_current, target$gradlogdensity)
   v_propose <- - leapfrog_result$v
   x_propose <- leapfrog_result$x
-  loglik_current <- target_logdensity(matrix(x_current, nrow = 1))
-  loglik_propose <- target_logdensity(matrix(x_propose, nrow = 1))
+  loglik_current <- target$logdensity(matrix(x_current, nrow = 1))
+  loglik_propose <- target$logdensity(matrix(x_propose, nrow = 1))
   ### metropolis acceptance step
   logacceptratio <- loglik_propose - loglik_current + sum(v_current^2)/2 - sum(v_propose^2)/2
   if(log(runif(1)) < logacceptratio){x = x_propose}
@@ -50,6 +50,6 @@ target$kernel <- function(x){
 }
 
 ### directly sampling from the surrogate distribution
-surrogate$kernel <- function(x) return(surrogate_rinit())
+surrogate$kernel <- function(x) return(surrogate$rinit())
 
 setwd('./WL')
