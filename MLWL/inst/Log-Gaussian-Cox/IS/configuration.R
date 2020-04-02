@@ -38,3 +38,5 @@ surrogate$rinit <- function(n){
   }
   return(xparticles)
 } 
+
+setwd('./IS')
