@@ -10,7 +10,7 @@ data {
   int<lower = 0> p;       // number of variables
   real<lower = 0> lambda;
   matrix[n, p] X;         // design matrix X
-  int y[n];               // observations y
+  int Y[n];               // observations Y
 }
 parameters {
   real alpha;
@@ -29,7 +29,7 @@ model {
   target += logssq;
 
   // likelihood
-  y ~ bernoulli_logit(X_beta);
+  Y ~ bernoulli_logit(X_beta);
 }
 '
 
@@ -50,7 +50,7 @@ stan.fit <- stan(model_code = LogisticRegression.stan,
                    p = p,
                    lambda = lambda,
                    X = X,
-                   y = y),
+                   Y = Y),
                  warmup = warmup, iter = iteration, chains = 1, control = list(adapt_delta = 0.8))
 stan.fit.extract = extract(stan.fit)
 bridge_result <- bridge_sampler(stan.fit, method = "normal", maxiter = 1000)
