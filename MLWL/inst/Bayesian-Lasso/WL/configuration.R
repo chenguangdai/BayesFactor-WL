@@ -1,7 +1,7 @@
 setwd('..')
 
 ### load in data
-load("data/XY/BayesianLasso_SNR_", SNR, ".RData", sep = ""))
+load(paste("data/XY/BayesianLasso_SNR_", SNR, ".RData", sep = ""))
 
 ### pre-calculate quantity
 XtX <- t(X)%*%X
@@ -24,7 +24,7 @@ target$logdensity <- function(x){
 
 ### the surrogate distribution
 surrogate <- list()
-load("data/VI/VI_SNR_", SNR, "_lambda_", lambda, ".RData", sep = ""))
+load(paste("data/VI/VI_SNR_", SNR, "_lambda_", lambda, ".RData", sep = ""))
 surrogate_mu <- c(data_save$surrogate_m, data_save$surrogate_phi, data_save$surrogate_u)
 surrogate_sigma <- sqrt(c(data_save$surrogate_ssq, data_save$surrogate_zetasq, data_save$surrogate_vsq))
 surrogate$logdensity <- function(x){
@@ -51,3 +51,4 @@ surrogate$kernel <- function(x){
   return(rnorm(dimension, mean = surrogate_mu, sd = surrogate_sigma))
 }
 
+setwd('./WL')
