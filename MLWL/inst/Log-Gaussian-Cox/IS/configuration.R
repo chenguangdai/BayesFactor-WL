@@ -9,6 +9,7 @@ source("code/load_data.R")
 ### define the target distribution
 ### prior distribution
 prior <- list()
+source("code/prior.R")
 prior$logdensity <- function(x) return(dmvnorm_cholesky_inverse(x, prior_mean, prior_precision_chol))
 
 ### likelihood
