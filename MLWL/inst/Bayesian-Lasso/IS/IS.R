@@ -5,6 +5,9 @@ library(debiasedhmc)
 ### source C functions
 sourceCpp("mvnorm.cpp")
 
+### configuration
+source("configuration.R")
+
 ### SNR and lambda
 SNR <- 3
 lambda <- 5
