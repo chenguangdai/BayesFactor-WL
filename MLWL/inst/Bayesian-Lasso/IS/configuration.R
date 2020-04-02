@@ -29,8 +29,7 @@ prior$logdensity <- function(x){
 }
 
 ### likelihood
-likelihood <- list()
-likelihood$log <- function(x){
+loglikelihood <- function(x){
   num_samples <- nrow(x)
   beta <- x[, 1:p]
   eta <- x[, (p + 1):(2*p)]
@@ -42,7 +41,7 @@ likelihood$log <- function(x){
 
 ### the target distribution
 target <- list()
-target$logdensity <- function(x) return(prior$logdensity(x) + likelihood$log(x))
+target$logdensity <- function(x) return(prior$logdensity(x) + loglikelihood(x))
 
 ### the proposal distribution
 load(paste("data/VI/VI_SNR_", SNR, "_lambda_", lambda, ".RData", sep = ""))
