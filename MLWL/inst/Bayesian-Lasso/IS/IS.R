@@ -5,12 +5,12 @@ library(debiasedhmc)
 ### source C functions
 sourceCpp("mvnorm.cpp")
 
-### configuration
-source("configuration.R")
-
 ### SNR and lambda
 SNR <- 3
 lambda <- 5
+
+### configuration
+source("configuration.R")
 
 ### importance sampling
 start_time <- Sys.time()
