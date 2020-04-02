@@ -1,5 +1,8 @@
 setwd('..')
 
+### load in data
+load("data/XY/BayesianLasso_SNR_", SNR, ".RData", sep = ""))
+
 ### pre-calculate quantity
 XtX <- t(X)%*%X
 Xty <- c(t(X)%*%y)
