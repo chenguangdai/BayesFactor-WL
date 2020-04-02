@@ -9,6 +9,7 @@ sourceCpp("code/mvnorm.cpp", verbose = F)
 ### prior distribution
 source("code/prior.R")
 prior$logdensity <- function(x) return(dmvnorm_cholesky_inverse(x, prior_mean, prior_precision_chol))
+prior$gradlogdensity <- function(x) return(eigenMapMatMult(parameter_mu - x,  prior_precision))
 
 ### likelihood
 source("code/likelihood.R")
