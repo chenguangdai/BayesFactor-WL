@@ -11,7 +11,7 @@ lambda <- 5
 
 ### load in data
 setwd('..')
-load("data/XY/BayesianLasso_SNR_", SNR, ".RData", sep = "")
+load(paste("data/XY/BayesianLasso_SNR_", SNR, ".RData", sep = ""))
 setwd('./Chib')
 
 ### pre-calculate quantity
@@ -23,21 +23,15 @@ Xty <- c(t(X)%*%y)
 yty <- sum(y^2)
 
 ### Gibbs sampler
-Gibbs <- function(x){
-  beta <- x[1:p]
-  tausq <- x[(p + 1):(2*p)]
-  sigmasq <- x[2*p + 1]
-  
+gibbs_sampler <- function(beta, tausq, sigmasq){  
   ### given the rest, update beta
   A_tau_inverse <- solve(XtX + diag(tausq^(-1)))
   beta <- as.vector(rmvnorm(1, mean = A_tau_inverse%*%Xty, sigma = sigmasq * A_tau_inverse))
-  
   ### given the rest, update tausq
   tausq <- (rinvgauss(p, lambda * sqrt(sigmasq)/abs(beta), lambda^2))^(-1)
-  
   ### given the rest, update sigmasq
   sigmasq <- rinvchisq(1, n + p, scale = (sum((y - X%*%beta)^2) + sum(beta^2/tausq))/(n + p))
-  return(list(x = c(beta, tausq, sigmasq)))
+  return(list(beta = beta, tausq = tausq, sigmasq = sigmasq))
 }
 
 ### get full posterior samples
@@ -47,15 +41,17 @@ beta <- matrix(0, nrow = num_iter, ncol = p)
 tausq <- matrix(1, nrow = num_iter, ncol = p)
 sigmasq <- rep(1, num_iter)
 for(iter in 2:num_iter){
-  gibbs_result <- Gibbs(c(beta[iter - 1, ], tausq[iter - 1, ], sigmasq[iter - 1]))
-  beta[iter, ] <- gibbs_result$x[1:p]
-  tausq[iter, ] <- gibbs_result$x[(p + 1):(2*p)]
-  sigmasq[iter] <- gibbs_result$x[2*p + 1]
+  gibbs_result <- gibbs_sampler(beta[iter - 1, ], tausq[iter - 1, ], sigmasq[iter - 1])
+  beta[iter, ] <- gibbs_result$beta
+  tausq[iter, ] <- gibbs_result$tausq
+  sigmasq[iter] <- gibbs_result$sigmasq
 }
+
 ### burn in the first 10%
-beta <- beta[-c(1:(num_iter)*0.1), ]
-tausq <- tausq[-c(1:(num_iter)*0.1), ]
-sigmasq <- sigmasq[-c(1:(num_iter)*0.1)]
+burnin <- c(1:num_iter*0.1)
+beta <- beta[-burnin, ]
+tausq <- tausq[-burnin, ]
+sigmasq <- sigmasq[-burnin]
 
 ### estimate the (normalized) posterior density
 beta_star <- colMeans(beta)
@@ -79,7 +75,6 @@ tausq_temp <- matrix(1, nrow = num_iter, ncol = p)
 for(iter in 2:num_iter){
   ### given the rest, update tausq
   tausq_temp[iter, ] <- (rinvgauss(p, lambda * sqrt(sigmasq_temp[iter - 1])/abs(beta_star), lambda^2))^(-1)
-  
   ### given the rest, update sigmasq
   sigmasq_temp[iter] <- rinvchisq(1, n + p, scale = (sum((y - X%*%beta_star)^2) + sum(beta_star^2/tausq_temp[iter, ]))/(n + p))
 }
