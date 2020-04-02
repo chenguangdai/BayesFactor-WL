@@ -48,7 +48,7 @@ for(iter in 2:num_iter){
 }
 
 ### burn in the first 10%
-burnin <- c(1:num_iter*0.1)
+burnin <- c(1:(num_iter*0.1))
 beta <- beta[-burnin, ]
 tausq <- tausq[-burnin, ]
 sigmasq <- sigmasq[-burnin]
