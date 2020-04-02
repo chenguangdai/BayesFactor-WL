@@ -43,7 +43,7 @@ lambda <- 1
 
 ### run stan
 warmup <- 1000
-iteration <- 3500
+iteration <- 2000
 stan.fit <- stan(model_code = LogisticRegression.stan, 
                  data = list(
                    n = n,
