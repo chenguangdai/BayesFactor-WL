@@ -12,6 +12,7 @@ MH_gibbs <- function(beta, sigma){
       logposterior_current <- logposterior_forward
     }
   }
+  return(beta_current)
 }
 
 ### conditioning on beta, update sigma
