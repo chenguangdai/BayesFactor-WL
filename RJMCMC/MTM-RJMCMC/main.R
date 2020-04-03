@@ -5,10 +5,12 @@ library(LaplacesDemon)
 library(pscl)
 
 ### sparsity
-g <- exp(15)
+g <- exp(10)
 
-### the standard deviation of the auxiliary distribution
+### the standard deviation of the auxiliary distribution for beta
 sigma_auxiliary <- 1
+### the step size in MH for beta
+sigma_proposal <- 0.5
 
 ### algorithmic setting of MTM
 ### number of tries
