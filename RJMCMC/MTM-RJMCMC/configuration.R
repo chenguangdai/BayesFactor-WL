@@ -7,7 +7,6 @@ Y <- scale(Y)
 n <- length(Y)
 X <- apply(data[, 1:15], 2, scale)
 p <- 15
-g <- exp(15)
 
 ### mode finding 
 findmode <- function(variable_index){
