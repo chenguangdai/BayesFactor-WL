@@ -27,9 +27,8 @@ beta <- matrix(NA, nrow = num_iter, ncol = p)
 sigma <- rep(1, num_iter)
 marginal_prob <- rep(0, p)
 
-### random initialization
-initial_variable_index <- sample(x = 1:p, size = p, replace = F)
-beta[1, initial_variable_index] <- lm(Y ~ as.matrix(X[, initial_variable_index], nrow = n) - 1)$coef
+### initialization
+beta[1, ] <- lm(Y ~ as.matrix(X[, ], nrow = n) - 1)$coef
 sigma[1] <- update_sigma(beta[1, ])
 
 start_time <- Sys.time()
