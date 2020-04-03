@@ -19,7 +19,7 @@ findmode <- function(variable_index){
 auxiliary <- list()
 auxiliary$rinit <- function(n) return(rnorm(n, mean = 0, sd = sigma_auxiliary))
 auxiliary$logdensity <- function(beta){
-  return(sum(dnorm(beta, mean = 0, sd = sigma_auxiliary, log = TRUE)))
+  return(dnorm(beta, mean = 0, sd = sigma_auxiliary, log = TRUE))
 } 
 
 ### log posterior of beta conditioning on sigma
