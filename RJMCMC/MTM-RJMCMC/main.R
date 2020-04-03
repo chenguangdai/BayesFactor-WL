@@ -20,11 +20,11 @@ source("configuration.R")
 num_iter <- 5*10^4
 beta <- matrix(NA, nrow = num_iter, ncol = p)
 sigma <- rep(1, num_iter)
-margial_prob <- rep(0, p)
+marginal_prob <- rep(0, p)
 
 ### random initialization
 initial_variable_index <- sample(x = 1:p, size = p, replace = F)
-beta[1, initial_variable_index] <- lm(Y ~ as.matrix(X[, initial_variable_index], nrow = n) - 1)$coefficients
+beta[1, initial_variable_index] <- lm(Y ~ as.matrix(X[, initial_variable_index], nrow = n) - 1)$coef
 sigma[1] <- update_sigma(beta[1, ])
 
 start_time <- Sys.time()
@@ -38,9 +38,9 @@ for(iter in 2:num_iter){
   ### burn in the first 10%
   if(iter > 0.1*num_iter){
     selected_variable_index <- which(!is.na(beta[iter, ]))
-    margial_prob[selected_variable_index] <- margial_prob[selected_variable_index] + 1
+    marginal_prob[selected_variable_index] <- marginal_prob[selected_variable_index] + 1
   }
 }
 end_time <- Sys.time()
-margial_prob <- margial_prob/sum(margial_prob)
+marginal_prob <- marginal_prob/sum(marginal_prob)
 running_time <- as.numeric(end_time - start_time)
