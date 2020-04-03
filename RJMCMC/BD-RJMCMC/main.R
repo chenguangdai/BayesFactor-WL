@@ -10,7 +10,6 @@ g <- exp(10)
 ### the standard deviation of the proposal distribution for beta
 sigma_proposal <- 0.5
 
-
 ### configuration
 source("configuration.R")
 
