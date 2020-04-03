@@ -17,5 +17,3 @@ update_sigma <- function(beta){
   sigma <- sqrt(rigamma(1, alpha = a, beta = b))
   return(sigma)
 }
-ist(beta = beta, sigma = sigma))
-}
