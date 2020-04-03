@@ -1,12 +1,17 @@
 ### conditioning on sigma, update beta
-update_beta <- function(beta, sigma){
-  index <- which(!is.na(beta))
-  Xgamma <- as.matrix(X[, index], nrow = n)
-  XtXinv <- solve(t(Xgamma)%*%Xgamma)
-  XtXinv <- 0.5*(XtXinv + t(XtXinv))
-  XtY <- t(Xgamma)%*%Y
-  beta[index] <- rmvn(n = 1, mu = as.vector(g/(g + 1)*XtXinv%*%XtY), Sigma = g/(g + 1)*sigma^2*XtXinv)
-  return(beta)
+MH_gibbs <- function(beta, sigma){
+  beta_current <- beta
+  variable_index <- which(!is.na(beta))
+  logposterior_current <- logposterior(beta_current, sigma)
+  for(j in variable_index){
+    beta_forward <- beta_current
+    beta_forward[j] <- rnorm(1, mean = beta_current[j], sd = sigma_proposal)
+    logposterior_forward <- logposterior(beta_forward, sigma)
+    if(log(runif(1)) < (logposterior_forward - logposterior_current)){
+      beta_current <- beta_forward
+      logposterior_current <- logposterior_forward
+    }
+  }
 }
 
 ### conditioning on beta, update sigma
