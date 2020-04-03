@@ -8,6 +8,7 @@ library(pscl)
 g <- exp(10)
 
 ### the standard deviation of the proposal distribution for beta
+### also the step size in MH for beta
 sigma_proposal <- 0.5
 
 ### configuration
