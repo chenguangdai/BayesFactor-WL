@@ -18,20 +18,20 @@ BD_RJMCMC <- function(beta, sigma){
     if(num_variables_current == p) moveup_index <- 0
     
     if(moveup_index == 1){
-      ### move to higher dimension
+      ### move to a higher dimension
       ### select a variable to add in
       add_index <- sample(x = setdiff(1:p, variable_index_current), size = 1, replace = F)
       variable_index_forward <- c(variable_index_current, add_index)
       beta_forward[add_index] <- rproposal(1)
     }else{
-      ### move to lower dimension
+      ### move to a lower dimension
       ### select a variable to remove
       remove_index <- sample(x = variable_index_current, size = 1, replace = F)
       variable_index_forward <- setdiff(variable_index_current, remove_index)
       beta_forward[remove_index] <- NA
     }
     
-    ### calculating acceptance probability
+    ### calculate the acceptance probability
     logposterior_forward <- logposterior(beta_forward, sigma)
     logposterior_current <- logposterior(beta_current, sigma)
     logacceptance_prob <- logposterior_forward - logposterior_current
