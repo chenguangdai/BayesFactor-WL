@@ -4,7 +4,7 @@ update_beta <- function(beta, sigma){
   Xgamma <- as.matrix(X[, index], nrow = n)
   XtXinv <- solve(t(Xgamma)%*%Xgamma)
   XtY <- t(Xgamma)%*%Y
-  beta[index] <- rmvn(n = 1, mu = g/(g + 1)*XtXinv%*%XtY, sigma = g/(g + 1)*sigma^2*XtXinv)
+  beta[index] <- rmvn(n = 1, mu = g/(g + 1)*XtXinv%*%XtY, Sigma = g/(g + 1)*sigma^2*XtXinv)
   return(beta)
 }
 
