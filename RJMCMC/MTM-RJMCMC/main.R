@@ -4,6 +4,9 @@ library(mvnfast)
 library(LaplacesDemon)
 library(pscl)
 
+### sparsity
+g <- exp(15)
+
 ### the standard deviation of the auxiliary distribution
 sigma_auxiliary <- 1
 
