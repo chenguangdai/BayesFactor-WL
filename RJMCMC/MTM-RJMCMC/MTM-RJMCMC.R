@@ -22,7 +22,7 @@ MTM_RJMCMC <- function(beta, sigma){
       ### select a variable to add in
       add_index <- setdiff(1:p, variable_index_current)
       variable_index_forward <- c(variable_index_current, add_index)
-      beta_forward[add_index] <- rproposal(1)
+      beta_forward[add_index] <- auxiliary$rinit(1)
       
       ### calculate the moving direction (between two modes)
       mode_forward <- findmode(variable_index_forward)
