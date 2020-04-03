@@ -16,7 +16,7 @@ findmode <- function(variable_index){
   return(mode)
 }
 
-### auxiliary distribution of beta
+### the auxiliary distribution 
 auxiliary <- list()
 auxiliary$rinit <- function(n) return(rnorm(n, mean = 0, sd = sigma_auxiliary))
 auxiliary$logdensity <- function(beta){
@@ -33,3 +33,14 @@ logposterior <- function(beta, sigma){
   logp <- -qgamma/2*log(g) + 0.5*log(det(XtX)) - qgamma/2*log(sigma^2) - 0.5/sigma^2*((g + 1)/g*sum(fittedvalue^2) - 2*sum(fittedvalue*Y))
   return(logp)
 }
+
+### gibbs move
+source("code/gibbs.R")
+
+setwd('./MTM-RJMCMC')
+
+### MTM
+source("MTM.R")
+
+### MTM-RJMCMC
+source("MTM-RJMCMC.R")
