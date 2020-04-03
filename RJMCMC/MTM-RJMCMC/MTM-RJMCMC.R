@@ -20,7 +20,7 @@ MTM_RJMCMC <- function(beta, sigma){
     if(moveup_index == 1){
       ### move to higher dimension
       ### select a variable to add in
-      add_index <- setdiff(1:p, variable_index_current)
+      add_index <- sample(x = setdiff(1:p, variable_index_current), size = 1, replace = F)
       variable_index_forward <- c(variable_index_current, add_index)
       beta_forward[add_index] <- auxiliary$rinit(1)
       
