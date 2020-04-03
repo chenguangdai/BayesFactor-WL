@@ -19,7 +19,7 @@ source("configuration.R")
 ### MCMC
 num_iter <- 5*10^4
 beta <- matrix(NA, nrow = num_iter, ncol = p)
-model_dimension <- rep(0, p)
+sigma <- rep(1, num_iter)
 margial_prob <- rep(0, p)
 
 ### random initialization
