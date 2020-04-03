@@ -8,8 +8,8 @@ BD_RJMCMC <- function(beta, sigma){
   move_across_model <- rbern(1, prob = 0.5)
   if(move_across_model == 0){
     ### stay within the same dimension
-    ### gibbs move
-    beta_current <- update_beta(beta_current, sigma)
+    ### MH-within-gibbs move
+    beta_current <- MH_gibbs(beta_current, sigma)
   }else{
     ### move across different dimensions
     moveup_index <- rbern(1, prob = 0.5)
