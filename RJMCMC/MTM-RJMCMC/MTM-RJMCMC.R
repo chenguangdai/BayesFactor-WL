@@ -1,10 +1,3 @@
-### augmented log posterior
-logaugtarget <- function(beta, sigma, variable_index){
-  beta_temp <- beta
-  beta_temp[variable_index] <- NA
-  return(logposterior(beta_temp, sigma) + logproposal(beta[variable_index]))
-}
-
 ### MTM-RJMCMC
 MTM_RJMCMC <- function(beta, sigma){
   beta_current <- beta_forward <- beta
